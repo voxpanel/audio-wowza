@@ -1,0 +1,24 @@
+#!/bin/bash
+# @desativar-aacplus - Script para remover um relay AAC+
+
+if [ $# = 0 ]; then
+
+echo
+echo "Modo de Uso: /usr/local/WowzaMediaServer/desativar-aacplus PORTA"
+echo
+exit
+
+fi
+
+# Variaveis gerais
+porta=$1
+
+rm -rfv /usr/local/WowzaMediaServer/conf/$porta
+
+rm -rfv /usr/local/WowzaMediaServer/applications/$porta
+
+rm -rfv /usr/local/WowzaMediaServer/content/$porta.stream
+
+sed -i "/$porta/d" /usr/local/WowzaMediaServer/lista-streamings.txt
+
+echo concluido

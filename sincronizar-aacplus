@@ -1,0 +1,4 @@
+#!/bin/bash
+/usr/local/WowzaMediaServer/desativar-aacplus $1
+/usr/local/WowzaMediaServer/ativar-aacplus $1 $2 $3
+

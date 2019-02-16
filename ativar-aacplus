@@ -1,0 +1,30 @@
+#!/bin/bash
+# @ativar-aacplus - Script para configurar um relay MP3 -> AAC+
+
+if [ $# = 0 ]; then
+
+echo
+echo "Modo de Uso: /usr/local/WowzaMediaServer/ativar-aacplus PORTA IP OUVINTES"
+echo
+exit
+
+fi
+
+# Variaveis gerais
+porta=$1
+ip=$2
+ouvintes=$3
+
+mkdir -v /usr/local/WowzaMediaServer/conf/$porta
+
+mkdir -v /usr/local/WowzaMediaServer/applications/$porta
+
+cp -v /usr/local/WowzaMediaServer/templates/Application.xml /usr/local/WowzaMediaServer/conf/$porta
+
+perl -i -p -e "s/OUVINTES/$ouvintes/" /usr/local/WowzaMediaServer/conf/$porta/Application.xml
+
+echo "http://$ip:$porta" > /usr/local/WowzaMediaServer/content/$porta.stream
+
+echo "`date "+%d/%m/%Y %T"` http://$ip:$porta" >> /usr/local/WowzaMediaServer/lista-streamings.txt
+
+echo concluido
